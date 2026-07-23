@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -28,14 +29,14 @@
     textarea { resize: vertical; min-height: 90px; margin-top: 8px; }
     .sub-input-row { display: flex; align-items: center; margin-top: 8px; gap: 8px; }
     .sub-label { font-weight: bold; color: var(--primary); font-size: 1.0rem; min-width: 36px; }
-    .sub-input-row input { flex: 1; } 
+    .sub-input-row input { flex: 1; }
 
     .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
     button { padding: 12px 24px; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-prev { background: #94a3b8; color: white; }
     .btn-next { background: var(--primary); color: white; }
     .btn-submit { background: #16a34a; color: white; display: none; }
-    .btn-retry { background: #0284c7; color: white; display: block; margin: 20px auto 0 auto; } 
+    .btn-retry { background: #0284c7; color: white; display: block; margin: 20px auto 0 auto; }
     
     .result-mark { font-size: 1.3rem; margin-left: 8px; }
     .mark-correct { color: var(--correct); }
@@ -109,9 +110,9 @@ const bankNormal = [
   {
     q: "계 1:3에 ①‘읽는 자’와 ②‘듣는 자들’과 ③‘지키는 자들’은 누구인지 각각 계시록의 해당 장(성구)과 함께 쓰시오.",
     keywords: [
-      "열린 책", "새요한", "계10장",
-      "새요한", "배우는", "백성", "나라", "방언", "임금", "계10:11",
-      "새요한", "포함", "12지파", "144,000", "흰 무리", "계7장"
+      ["열린 책", "새요한", "계10장"],
+      ["배우는", "백성", "나라", "방언", "임금", "계10:11"],
+      ["12지파", "144,000", "흰 무리", "계7장"]
     ],
     a: [
       "열린 책을 받아먹은 새요한 (계 10장)",
@@ -122,7 +123,7 @@ const bankNormal = [
   {
     q: "계시록 성취는 ①누구의 출현으로 시작되는지 관련 성구와 함께 쓰고, 계시록이 성취되기 시작한 이 일은 ②언제, ③어디에서 실상으로 이루어졌는지 쓰시오.",
     keywords: [
-      ["재림 예수님", "계1, 2, 3장"],
+      ["재림 예수님", "예수님"],
       ["1966"],
       ["과천", "청계산", "장막성전"]
     ],
@@ -134,7 +135,7 @@ const bankNormal = [
   },
   {
     q: "계 2~3장에 보낸 편지 내용은 ①몇 가지 무엇이며, 계 2~3장의 출현 인물 ②세 존재를 순차적으로 쓰고, 그들이 각자 ③한 일을 쓰시오.",
-    labels: ["①", "②", "③ 일곱 사자", "   니골라당", "   요한"],
+    labels: ["①내용", "②세 존재", "③일곱 사자", "④니골라당", "⑤요한"],
     a: [
       "세 가지: 본 것, 이제 있는 일, 장차 될 일",
       "일곱 사자, 니골라당, 요한",
@@ -147,7 +148,7 @@ const bankNormal = [
     q: "계시록의 3가지 비밀은 무엇인지 성구와 함께 기록하시오.",
     keywords: [
       ["일곱 별", "촛대", "계1:20"],
-      ["음녀", "바벨론", "짐승", "계17:5~7"],
+      ["음녀", "바벨론", "짐승", "계17:5"],
       ["일곱째 나팔", "계10:7"]
     ],
     a: [
@@ -159,7 +160,7 @@ const bankNormal = [
   {
     q: "이기는 자에게 주겠다고 계 2~3장에 약속한 ①복을 쓰고, 이것 외에 이기는 자가 받는 ②또 1가지 복을 증거 성구와 함께 쓰시오.",
     keywords: [
-      ["생명나무 과실", "생명의 면류관", "둘째 사망의 해 면함", "감추었던 만나", "흰 돌", "철장", "새벽별", "흰옷", "생명책 녹명", "하나님 성전의 기둥", "하나님과 거룩한 성 새 예루살렘의 이름과 예수님의 새 이름 기록", "예수님의 보좌에 앉게 해줌"],
+      ["생명나무", "면류관", "만나", "흰 돌", "철장", "새벽별", "흰옷", "생명책", "기둥", "보좌"],
       ["유업", "아들", "계21:7"]
     ],
     a: [
@@ -177,8 +178,8 @@ const bankNormal = [
   {
     q: "계 4:8에서 하나님의 보좌가 장차 이 땅에 임해 오신다고했다. 하나님의 보좌는 계시록 ①몇 장의 어디에 오시며, 그곳의 실체는 ②어디인가?",
     keywords: [
-      ["계14장", "12지파", "인 맞은", "144,000", "시온산"],
-      ["신천지", "예수교", "증거장막성전"]
+      ["계14장", "시온산"],
+      ["신천지", "증거장막성전"]
     ],
     a: [
       "계 14장의 12지파 인 맞은 144,000이 있는 시온산",
@@ -213,57 +214,6 @@ const bankNormal = [
       "계 8장, 계 9장"
     ]
   }
-  {
-    q: "마 8장의 바깥 어두운 데로 쫓겨나는 ①‘나라의 본 자손들’과 ②‘동서로부터 와서 천국에 앉는 자들’은 누구인지 각각 관련 성경 장과 함께 쓰시오.",
-    a: [
-    "부패한 전통 교회(영적 이스라엘), 계 6장(계 13장)",
-    "추수되어 인 맞은 신천지 12지파(영적 새 이스라엘), 계 7장(계 14장)",
-      ]
-}
-  {
-    q: "계 7장의 인 맞은 자들은 ①무슨 일 후, ②어디서 어떻게 온 자들이며, 이들의 실체는 ③누구인가?",
-    a: [
-   "계 6장의 배도한 선천 해⋅달⋅별에 대한 심판 후",
-   "추수 밭에서 추수되어",
-   "신천지 12지파 144,000",
-     ]
-  }
-  {
-    q: "계 8장에서 나팔 소리가 나는 이유는 ①무엇인가? 또한 계 8~9장에서 죽임을 당한 자들은 ②누구이며, 1~6번째 나팔 소리와 일곱 번째 나팔 소리는 ③무엇이 다른가?",
-      labels: ["①", "②", "③ 1~6째 나팔", "   일곱 번째 나팔"]
-    a: [
-      "인을 다 뗌으로 책이 열려 읽으므로",
-      "계 6장에서 쫓겨난 자들",
-      "배도자들의 죽음",
-      "구원의 나팔"
-    ]
-  }
- {
-    q: "계시록에서 이방 짐승(멸망자)이 선민 장막을 심판하는 성경 장 3개는 ①무엇이며, 일곱 천사가 받은 일곱 나팔의 실체는 ②무엇인지 성경 장과 함께 쓰시오.",
-    a: [
-      "계8장, 계9장, 계13장",
-      "심판 때 믿음의 씨로 빼낸 성도들, 계6장",
-      ]
-  }
-  {
-    q: "계 9장과 계 19장의 ‘탄 자와 말’은 각각 ①어느 소속의 어떤 존재이며, 계 9장에서 출현한 말의 ②‘머리’와 ③‘꼬리’, 그 말 입에서 나오는 ④‘불, 연기, 유황’은 무엇인가?",
-      labels: ["① 계 9장", "  계19장", "②", "③", "④"]
-    a: [
-      "마귀 소속 영,육",
-      "하나님 소속 영,육",
-      "용의 일곱 목자",
-      "거짓 선지자",
-      "거짓 교리와 교법"
-      ]
-  }
-  {
-    q: "계 9:15을 본바, 여섯째 나팔의 재앙에서 범죄한 네 천사에게 ‘죽임을 당하는 사람’은 ①누구이며, 죽임을 당하는 ‘그 연(年), 월, 일, 시’의 실상은 ②언제, 어떤 사건인가?,
-    a: [
-      "배도한 장막성전 사람들",
-      "1981년 9월 20일 14시, 목자 임직식",
-            ]
-  }
-
 ];
 
 const bankBible = [
@@ -597,9 +547,10 @@ function checkAnswer(userStr = '', correctStr = '', keywordList = null) {
     return keywordList.every(keyGroup => {
       if (Array.isArray(keyGroup)) {
         return keyGroup.some(synonym => pureUser.includes(clean(synonym)));
-      } else {
+      } else if (typeof keyGroup === 'string') {
         return pureUser.includes(clean(keyGroup));
       }
+      return false;
     });
   }
 
