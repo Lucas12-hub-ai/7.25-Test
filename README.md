@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -24,7 +25,6 @@
     .badge-bible { background: #8b5cf6; }
     .badge-jss { background: #f59e0b; }
     
-    /* 입력창 및 소문항 스타일 */
     textarea, input[type="text"] { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 1rem; font-family: inherit; }
     textarea { resize: vertical; min-height: 90px; margin-top: 8px; }
     .sub-input-row { display: flex; align-items: center; margin-top: 8px; gap: 8px; }
@@ -38,7 +38,6 @@
     .btn-submit { background: #16a34a; color: white; display: none; }
     .btn-retry { background: #0284c7; color: white; display: block; margin: 20px auto 0 auto; } 
     
-    /* 채점 피드백 스타일 */
     .result-mark { font-size: 1.3rem; margin-left: 8px; }
     .mark-correct { color: var(--correct); }
     .mark-wrong { color: var(--wrong); }
@@ -71,10 +70,6 @@
 <script>
 const circNums = ['①', '②', '③', '④', '⑤'];
 
-// ==========================================
-// 1. 문제 데이터베이스
-// ==========================================
-
 const bankNormal = [
   {
     q: "나는 성경이 말씀한 누구인지, 관련 성경 장과 함께 쓰시오.",
@@ -96,8 +91,8 @@ const bankNormal = [
   {
     q: "성경에는 생명나무와 선악을 알게 하는 나무가 있다. 오늘날 ①생명나무 과실과 ②선악나무 과실은 무엇인지 각각 쓰시오.",
     keywords: [
-      "계시록", "실상", "말씀",
-      "거짓 목자", "거짓 교리"
+      ["계시록", "실상", "말씀"],
+      ["거짓 목자", "거짓 교리"]
     ],
     a: [
       "계시록의 실상의 말씀",
@@ -115,9 +110,9 @@ const bankNormal = [
   {
     q: "계 1:3에 ①‘읽는 자’와 ②‘듣는 자들’과 ③‘지키는 자들’은 누구인지 각각 계시록의 해당 장(성구)과 함께 쓰시오.",
     keywords: [
-      "열린 책", "받아먹은", "새요한", "계10장",
-      "새요한", "배우는", "백성", "나라", "방언", "임금", "계10:11",
-      "새요한", "포함", "12지파", "144,000", "흰 무리", "계7장"
+      ["열린 책", "새요한", "계10장"],
+      ["배우는", "백성", "나라", "방언", "임금", "계10:11"],
+      ["12지파", "144,000", "흰 무리", "계7장"]
     ],
     a: [
       "열린 책을 받아먹은 새요한 (계 10장)",
@@ -128,10 +123,10 @@ const bankNormal = [
   {
     q: "계시록 성취는 ①누구의 출현으로 시작되는지 관련 성구와 함께 쓰고, 계시록이 성취되기 시작한 이 일은 ②언제, ③어디에서 실상으로 이루어졌는지 쓰시오.",
     keywords: [
-      "재림 예수님", [["계1장", "계2장", "계3장"], ["계1, 2, 3장"], ["계1~3장"], ["계1-3장"]],
-      "1966",
-      "과천", "청계산 하", "장막성전"
-    ]
+      ["재림 예수님", "예수님"],
+      ["1966"],
+      ["과천", "청계산", "장막성전"]
+    ],
     a: [
       "재림 예수님 (계 1, 2, 3장)",
       "1966년",
@@ -140,11 +135,7 @@ const bankNormal = [
   },
   {
     q: "계 2~3장에 보낸 편지 내용은 ①몇 가지 무엇이며, 계 2~3장의 출현 인물 ②세 존재를 순차적으로 쓰고, 그들이 각자 ③한 일을 쓰시오.",
-    keywords: [
-      "세 가지", "본 것", "이제 있는 일", "장차 될 일",
-      "일곱 사자", "니골라당", "요한",
-    ]
-    labels: ["①", "②", "③", "일곱 사자:", "니골라당:", "요한:"],
+    labels: ["①내용", "②세 존재", "③일곱 사자", "④니골라당", "⑤요한"],
     a: [
       "세 가지: 본 것, 이제 있는 일, 장차 될 일",
       "일곱 사자, 니골라당, 요한",
@@ -156,10 +147,10 @@ const bankNormal = [
   {
     q: "계시록의 3가지 비밀은 무엇인지 성구와 함께 기록하시오.",
     keywords: [
-      "일곱 별", "일곱 금 촛대", "비밀", "계1:20",
-      "음녀 바벨론", "일곱 머리", "열 뿔", "짐승", "비밀", "계17:5~7",
-      "마지막", "일곱째 나팔", "비밀", "계10:7"
-    ]
+      ["일곱 별", "촛대", "계1:20"],
+      ["음녀", "바벨론", "짐승", "계17:5"],
+      ["일곱째 나팔", "계10:7"]
+    ],
     a: [
       "일곱 별과 일곱 금 촛대의 비밀 (계 1:20)",
       "음녀 바벨론과 일곱 머리와 열 뿔 가진 짐승의 비밀 (계 17:5~7)",
@@ -169,9 +160,9 @@ const bankNormal = [
   {
     q: "이기는 자에게 주겠다고 계 2~3장에 약속한 ①복을 쓰고, 이것 외에 이기는 자가 받는 ②또 1가지 복을 증거 성구와 함께 쓰시오.",
     keywords: [
-      "생명나무 과실", "생명의 면류관", "둘째 사망의 해 면함", "감추었던 만나", "흰돌", "철장", "새벽별", "흰옷", "생명책 녹명", "하나님 성전의 기둥", "하나님과 거룩한 성 새 예루살렘의 이름과 예수님의 새 이름 기록", "예수님의 보좌에 앉게 해 줌",
-      "유업", "받는", "아들", "계21:7"
-    ]
+      ["생명나무", "면류관", "만나", "흰 돌", "철장", "새벽별", "흰옷", "생명책", "기둥", "보좌"],
+      ["유업", "아들", "계21:7"]
+    ],
     a: [
       "생명나무 과실, 생명의 면류관, 둘째 사망의 해를 면함, 감추었던 만나, 흰 돌, 철장, 새벽별, 흰옷 입음, 생명책 녹명, 하나님 성전의 기둥, 하나님과 거룩한 성 새 예루살렘의 이름과 예수님의 새 이름 기록, 예수님의 보좌에 앉게 해 줌",
       "유업을 받는 아들이 됨 (계 21:7)"
@@ -186,9 +177,10 @@ const bankNormal = [
   },
   {
     q: "계 4:8에서 하나님의 보좌가 장차 이 땅에 임해 오신다고했다. 하나님의 보좌는 계시록 ①몇 장의 어디에 오시며, 그곳의 실체는 ②어디인가?",
-      keywodrs: [
-      "계14장", "12지파", "인 맞은", "144,000", "시온산",
-      "신천지", "예수교", "증거장막성전" ]
+    keywords: [
+      ["계14장", "시온산"],
+      ["신천지", "증거장막성전"]
+    ],
     a: [
       "계 14장의 12지파 인 맞은 144,000이 있는 시온산",
       "신천지예수교 증거장막성전"
@@ -211,10 +203,11 @@ const bankNormal = [
   },
   {
     q: "계 6장은 ①누가, 누구를 들어, ②누구를 심판한 것이며, 계 6장에서 쫓겨난 자들은 ③몇 장, 몇 장에서 죽임을 당하는가?",
-      keywords: [
-      "예수님", "네 생물",
-      "배도한 선민",
-      ["계8장", "계9장"], ["계8,9장"], ["계8-9장"]]
+    keywords: [
+      ["예수님", "네 생물"],
+      ["배도한 선민"],
+      ["계8장", "계9장"]
+    ],
     a: [
       "예수님, 네 생물",
       "배도한 선민 (일곱 사자와 장막 성도들)",
@@ -223,7 +216,6 @@ const bankNormal = [
   }
 ];
 
-// [B] 성구 암송 문제 5개
 const bankBible = [
   { 
     q: "다음 성구를 암송하여 쓰시오 (계 1:1~3)",
@@ -248,7 +240,7 @@ const bankBible = [
     q: "다음 성구를 암송하여 쓰시오 (계 10:10~11)",
     labels: ["10절", "11절"], 
     a: [
-      "내가 천사의 손에서 작은 책을 갖다 먹어버리니 내 입에는 꿀같이 다나 먹은 후에 내 배에서는 쓰게 되더라",
+      "내가 천사의 손에서 작은 책을 갖다 먹어버리니 내 입에는 굴같이 달나 먹은 후에 내 배에서는 쓰게 되더라",
       "저가 내게 말하기를 네가 많은 백성과 나라와 방언과 임금에게 다시 예언하여야 하리라 하더라"
     ]
   },
@@ -271,15 +263,14 @@ const bankBible = [
   }
 ];
 
-// [C] 진성신 말씀 통합 문제 20개
 const bankJss = [
   {
     q: "예언이 성취되는 실상 때 예언이 이루어진 것을 증거하는 자는 ①누구이며, 오늘날 신약 계시록의 이루어진 실상을 증거하고 있는 인물은 ②누구인가?",
     source: "계시록의 예언과 실상 (43.06.24)",
     keywords: [
-      ["이루어진 실상", "실체들"], "다 본자",
-      "신천지", "약속의 목자"
-    ]
+      ["실상", "다 본 자"],
+      ["신천지", "약속의 목자"]
+    ],
     a: [
       "그 이루어진 실상(실체들)을 다 본 자",
       "신천지의 약속의 목자(이긴자, 새요한)"
@@ -432,9 +423,6 @@ const bankJss = [
   }
 ];
 
-// ==========================================
-// 2. 시스템 로직
-// ==========================================
 let currentExam = []; 
 let userAnswers = {}; 
 let currentPage = 0;
@@ -443,6 +431,15 @@ const qPerPage = 4;
 
 function shuffle(array) {
   return [...array].sort(() => Math.random() - 0.5);
+}
+
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function initExam() {
@@ -476,15 +473,14 @@ function renderPage() {
     else if (q.type === 'bible') badgeHtml = '<span class="badge badge-bible">성구</span>';
     else if (q.type === 'jss') badgeHtml = '<span class="badge badge-jss">진성신</span>';
 
-    const sourceHtml = q.source ? `<div class="source-text">📌 출처: ${q.source}</div>` : '';
+    const sourceHtml = q.source ? `<div class="source-text">📌 출처: ${escapeHtml(q.source)}</div>` : '';
 
     let inputHtml = '';
 
-    // 소문항(배열 정답) 처리 (labels가 있으면 라벨 표시, 없으면 ①, ②...)
     if (Array.isArray(q.a)) {
       const savedArr = userAnswers[globalIdx] || [];
       inputHtml = q.a.map((subA, subIdx) => {
-        const val = savedArr[subIdx] || '';
+        const val = escapeHtml(savedArr[subIdx] || '');
         const labelText = (q.labels && q.labels[subIdx]) ? q.labels[subIdx] : circNums[subIdx];
         
         return `
@@ -495,14 +491,14 @@ function renderPage() {
         `;
       }).join('');
     } else {
-      const val = userAnswers[globalIdx] || '';
+      const val = escapeHtml(userAnswers[globalIdx] || '');
       inputHtml = `<input type="text" style="margin-top:8px;" value="${val}" oninput="saveAnswer(${globalIdx}, this.value)" placeholder="정답을 입력하세요..." />`;
     }
 
     const qDiv = document.createElement('div');
     qDiv.className = 'question-card';
     qDiv.innerHTML = `
-      <div class="question-title">${badgeHtml} Q${globalIdx + 1}. ${q.q}</div>
+      <div class="question-title">${badgeHtml} Q${globalIdx + 1}. ${escapeHtml(q.q)}</div>
       ${sourceHtml}
       ${inputHtml}
     `;
@@ -538,39 +534,37 @@ function changePage(direction) {
   window.scrollTo(0, 0);
 }
 
-// 스마트 채점 함수 (키워드 및 동의어 처리 지원)
 function checkAnswer(userStr = '', correctStr = '', keywordList = null) {
-  if (!userStr || !userStr.trim()) return false;
+  if (!userStr || !String(userStr).trim()) return false;
 
-  const clean = (str) => String(str).replace(/[\s\:\/,\.\-\_\(\)（）]/g, '');
+  const clean = (str) => String(str).replace(/[\s\:\/,\.\-\_\(\)（）~]/g, '');
   const pureUser = clean(userStr);
   const pureCorrect = clean(correctStr);
 
-  // 1. 답안 완벽 일치
   if (pureUser === pureCorrect) return true;
 
-  // 2. 지정된 keywords가 있는 경우
   if (keywordList && Array.isArray(keywordList) && keywordList.length > 0) {
     return keywordList.every(keyGroup => {
       if (Array.isArray(keyGroup)) {
-        // [ "12지파", "열두지파" ] -> 둘 중 하나만 포함되어도 인정 (OR)
         return keyGroup.some(synonym => pureUser.includes(clean(synonym)));
       } else {
-        // "추수" -> 반드시 포함 (AND)
         return pureUser.includes(clean(keyGroup));
       }
     });
   }
 
-  // 3. keywords가 없는 경우 기본 자동 추출 분할 채점
-  const defaultKeywords = pureCorrect
-    .split(/[:\/,\n&]/)
-    .map(k => clean(k))
-    .filter(k => k.length > 0);
+  const words = String(correctStr)
+    .replace(/[\(\)（）~]/g, ' ')
+    .split(/[\s\:\/,\.\-]+/)
+    .map(w => clean(w))
+    .filter(w => w.length > 1);
 
-  if (defaultKeywords.length === 0) return false;
+  if (words.length > 0) {
+    const matchCount = words.filter(w => pureUser.includes(w)).length;
+    if (matchCount / words.length >= 0.5) return true;
+  }
 
-  return defaultKeywords.every(kw => pureUser.includes(kw));
+  return pureUser.includes(pureCorrect) || pureCorrect.includes(pureUser);
 }
 
 function submitExam() {
@@ -591,27 +585,31 @@ function submitExam() {
       q.a.forEach((corA, subIdx) => {
         const uVal = uArr[subIdx] || '';
         
-        // 소문항별 키워드 검사
-        const subKeywords = (q.keywords && Array.isArray(q.keywords[subIdx])) ? q.keywords[subIdx] : null;
+        let subKeywords = null;
+        if (q.keywords && Array.isArray(q.keywords)) {
+          if (Array.isArray(q.keywords[subIdx])) {
+            subKeywords = q.keywords[subIdx];
+          } else if (typeof q.keywords[subIdx] === 'string') {
+            subKeywords = [q.keywords[subIdx]];
+          }
+        }
+
         const ok = checkAnswer(uVal, corA, subKeywords);
-        
         if (!ok) isCorrect = false;
 
         const labelText = (q.labels && q.labels[subIdx]) ? q.labels[subIdx] : circNums[subIdx];
 
-        subFeedback.push(`<div><strong>${labelText} 내 답:</strong> ${uVal || '(미입력)'} ${ok ? '⭕' : '❌'}<br><span class="diff-correct">   정답: ${corA}</span></div>`);
+        subFeedback.push(`<div><strong>${labelText} 내 답:</strong> ${escapeHtml(uVal) || '(미입력)'} ${ok ? '⭕' : '❌'}<br><span class="diff-correct">   정답: ${escapeHtml(corA)}</span></div>`);
       });
 
       feedbackHtml = subFeedback.join('<div style="margin-top:6px;"></div>');
     } else {
       const uAns = userAnswers[idx] || '';
-      
-      // 단일 문항 키워드 검사
       isCorrect = checkAnswer(uAns, q.a, q.keywords);
       
       feedbackHtml = `
-        <div><strong>내 답안:</strong> ${uAns || '(미입력)'}</div>
-        ${!isCorrect ? `<div style="margin-top:6px;"><strong>정답:</strong> <span class="diff-correct">${q.a}</span></div>` : ''}
+        <div><strong>내 답안:</strong> ${escapeHtml(uAns) || '(미입력)'}</div>
+        ${!isCorrect ? `<div style="margin-top:6px;"><strong>정답:</strong> <span class="diff-correct">${escapeHtml(q.a)}</span></div>` : ''}
       `;
     }
 
@@ -625,7 +623,7 @@ function submitExam() {
       : '<span class="result-mark mark-wrong">❌</span>';
 
     card.innerHTML = `
-      <div class="question-title">Q${idx + 1}. ${q.q} ${resultMark}</div>
+      <div class="question-title">Q${idx + 1}. ${escapeHtml(q.q)} ${resultMark}</div>
       <div class="feedback-box">
         ${feedbackHtml}
       </div>
